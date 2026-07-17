@@ -32,6 +32,7 @@
         "updateKey": "email",
         "schema": "public"
       },
+      "verification": "Wrote upsert logic and configured logging for success/failure.",
       "id": "PRJ-3FF7-0031",
       "name": "Upsert Customers into PostgreSQL",
       "type": "n8n-nodes-base.postgres",
