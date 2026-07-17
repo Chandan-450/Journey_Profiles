@@ -1,6 +1,7 @@
 {
   "dashboardName": "Customer Journey Visualization Dashboard",
   "refreshIntervalMinutes": 10,
+  "refreshScheduleRule": "*/10 * * * *",
   "layout": {
     "sections": [
       {
@@ -17,6 +18,14 @@
         "metrics": ["Drop-offs", "Successful Conversions", "Edge-case Loops"],
         "description": "Clearly represents successful transitions and dead-ends across the customer logic paths."
       }
+      "dataSourceConfiguration": {
+          "sourceType": "AirtableBase",
+          "syncEnabled": true
+        },
+        "renderingComponents": [
+          { "type": "funnel_stage_count_table", "columns": ["Stage", "Count"] },
+          { "type": "branch_path_chart", "options": { "showLegend": true } }
+        ]
     ]
   }
 }
