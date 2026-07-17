@@ -1,0 +1,22 @@
+{
+  "dashboardName": "Customer Journey Visualization Dashboard",
+  "refreshIntervalMinutes": 10,
+  "layout": {
+    "sections": [
+      {
+        "id": "stage_distribution_metrics",
+        "title": "Customer Count per Journey Stage",
+        "type": "bar_chart",
+        "trackedStages": ["Awareness", "Consideration", "Conversion"],
+        "description": "Displays the precise total count of customers currently occupying each journey stage."
+      },
+      {
+        "id": "branching_outcomes_visualization",
+        "title": "Branching Path Performance",
+        "type": "funnel_chart",
+        "metrics": ["Drop-offs", "Successful Conversions", "Edge-case Loops"],
+        "description": "Clearly represents successful transitions and dead-ends across the customer logic paths."
+      }
+    ]
+  }
+}
