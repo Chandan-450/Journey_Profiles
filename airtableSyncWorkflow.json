@@ -1,0 +1,48 @@
+{
+  "name": "Scheduled Airtable Customer Sync",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": "everyHour"
+      },
+      "id": "PRJ-3FF7-0029",
+      "name": "Configure n8n Cron Trigger",
+      "type": "n8n-nodes-base.cron",
+      "notes": "Triggers automatically every hour to pull data updates."
+    },
+    {
+      "parameters": {
+        "operation": "list",
+        "application": "AirtableBaseId",
+        "table": "Customers",
+        "additionalOptions": {
+          "filterByFormula": "IS_AFTER({Last Modified}, DATEADD(NOW(), -1, 'hours'))"
+        }
+      },
+      "id": "PRJ-3FF7-0030",
+      "name": "Fetch Records from Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "notes": "Fetches only new or changed records modified within the last hour."
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "table": "customers",
+        "updateKey": "email",
+        "schema": "public"
+      },
+      "id": "PRJ-3FF7-0031",
+      "name": "Upsert Customers into PostgreSQL",
+      "type": "n8n-nodes-base.postgres",
+      "notes": "Upserts processed customer records securely into the local database."
+    }
+  ],
+  "connections": {
+    "Configure n8n Cron Trigger": {
+      "main": [[{ "node": "Fetch Records from Airtable", "type": "main", "index": 0 }]]
+    },
+    "Fetch Records from Airtable": {
+      "main": [[{ "node": "Upsert Customers into PostgreSQL", "type": "main", "index": 0 }]]
+    }
+  }
+}
