@@ -1,6 +1,7 @@
 {
   "dashboardName": "Customer Journey Visualization Dashboard",
   "refreshIntervalMinutes": 10,
+  "refreshScheduleRule": "*/10 * * * *",
   "layout": {
     "sections": [
       {
